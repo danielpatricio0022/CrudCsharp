@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Person</title>
+</head>
+<body>
+
+<h1>Add Person</h1>
+
+<form action="/Crud/AddPerson" method="post">
+    <label>
+        <input type="text" name="firstName" placeholder="First Name" required />
+    </label>
+    <label>
+        <input type="text" name="lastName" placeholder="Last Name" required />
+    </label>
+    <label>
+        <input type="text" name="address" placeholder="Address" required />
+    </label>
+    <label>
+        <input type="text" name="gender" placeholder="Gender" required />
+    </label>
+    <button type="submit">Add Person</button>
+</form>
+
+</body>
+</html>
