@@ -5,7 +5,8 @@ namespace CRUD.DataBase
     {
         public static void connection()
         {
-            string dbPath = @"C:\Users\CMT\RiderProjects\App\CRUD\DataBase\CRUD.db"; //absolut path
+            //string dbPath = @"C:\Users\CMT\RiderProjects\App\CRUD\DataBase\CRUD.db"; //absolut path
+            string dbPath = @"C:\Users\se66162\IdeaProjects\CrudCsharp\CRUD\DataBase\CRUD.db"; 
             using (var connection = new SqliteConnection($"Data Source={dbPath}"))
             {
                 try

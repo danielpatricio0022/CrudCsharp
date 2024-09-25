@@ -6,7 +6,7 @@ namespace CRUD.Repository
 {
     public class PersonRepository
     {
-        string path = @"C:\Users\CMT\RiderProjects\App\CRUD\DataBase\CRUD.db"; // caminho absoluto
+        string path = @"C:\Users\se66162\IdeaProjects\CrudCsharp\CRUD\DataBase\CRUD.db";   // caminho absoluto
 
         public SqliteConnection Connect()
         {
@@ -154,11 +154,12 @@ namespace CRUD.Repository
                                                     address = @address,
                                                     gender = @gender
                                                 WHERE id = @id;";
-                        command.Parameters.AddWithValue("@firstName", person.firstName);
-                        command.Parameters.AddWithValue("@lastName", person.lastName);
-                        command.Parameters.AddWithValue("@address", person.address);
-                        command.Parameters.AddWithValue("@gender", person.gender);
-                        command.Parameters.AddWithValue("@id", person.id); 
+                        command.Parameters.AddWithValue("@firstName", person.firstName ?? (object)DBNull.Value);
+                        command.Parameters.AddWithValue("@lastName", person.lastName ?? (object)DBNull.Value);
+                        command.Parameters.AddWithValue("@address", person.address ?? (object)DBNull.Value);
+                        command.Parameters.AddWithValue("@gender", person.gender ?? (object)DBNull.Value);
+                        command.Parameters.AddWithValue("@id", person.id);
+
 
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)

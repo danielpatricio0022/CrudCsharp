@@ -65,6 +65,32 @@ namespace CRUD.Tests
                 Console.WriteLine("Failed to add person.");
             }
         }
+        
+        public static void UpdatePerson()
+        {
+            PersonRepository personRepository = new PersonRepository();
+            var newPerson = new Person
+            {   id = 14,
+                firstName = "John",
+                lastName = "Doe",
+                address = "Unknown",
+                gender = "Male"
+            };
+
+            var result = personRepository.UpdatePerson(newPerson);
+
+            Console.WriteLine("Done updated");
+            if (result != null)
+            {
+                Console.WriteLine(
+                    $"Person Update ID: {result.id}, Name: {result.firstName} {result.lastName}, Address: {result.address}, Gender: {result.gender}");
+            }
+            else
+            {
+                Console.WriteLine("Failed to update person.");
+            }
+        }
+
 
         public static void deletePerson()
             {

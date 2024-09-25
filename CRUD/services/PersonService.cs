@@ -35,10 +35,20 @@ public class PersonService : PersonInterfaceService
         return _personRepository.addNewPerson(person);
     }
 
-    public Person? UpdatePerson(Person person)
+    public Person UpdatePerson(Person person)
     {
-        return _personRepository.UpdatePerson(person);
+        if (person == null) throw new ArgumentNullException(nameof(person));
+
+        try
+        {
+            return _personRepository.UpdatePerson(person);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("An error occurred while updating the person.", ex);
+        }
     }
+
 
     public bool DeletePerson(long id)
     {

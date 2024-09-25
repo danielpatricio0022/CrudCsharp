@@ -2,7 +2,7 @@ namespace CRUD.entity;
 
 public class Person
 {
-    public long? id { get; set; } 
+    public long id { get; set; } 
     public string? firstName { get; set; }
     public string? lastName { get;  set; }
     public string? address { get;  set; }

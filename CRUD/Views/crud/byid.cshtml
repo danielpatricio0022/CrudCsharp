@@ -1,0 +1,60 @@
+﻿@model CRUD.entity.Person
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Person by ID</title>
+</head>
+<body>
+<h1>Search Person</h1>
+
+
+<form asp-action="GetPersonById" method="get">
+    <label for="personId">Enter Person ID:</label>
+    <input type="text" id="personId" name="id" placeholder="Enter person ID" required />
+    <button type="submit">Search</button>
+</form>
+
+
+@if (TempData["SuccessMessage"] != null)
+{
+<div style="color: green;">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+<div style="color: red;">@TempData["ErrorMessage"]</div>
+}
+
+@if (Model != null)
+{
+<h2>Person Details</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Address</th>
+        <th>Gender</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>@Model.id</td>
+        <td>@Model.firstName</td>
+        <td>@Model.lastName</td>
+        <td>@Model.address</td>
+        <td>@Model.gender</td>
+    </tr>
+    </tbody>
+</table>
+}
+else
+{
+<p>Not person found .</p>
+}
+
+</body>
+</html>
