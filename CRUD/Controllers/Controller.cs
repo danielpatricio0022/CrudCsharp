@@ -37,7 +37,7 @@ namespace CRUD.Controllers
                     return RedirectToAction("Index");
                 }
 
-                TempData["ErrorMessage"] = "Failed to create person.";
+                TempData["ErrorMessage"] = "Failed to create personn.";
             }
             else
             {
