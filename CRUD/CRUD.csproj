@@ -8,9 +8,17 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Cake.LibMan" Version="1.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.8" />
+        <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
         <PackageReference Include="WakaTime" Version="8.1.11" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\..\..\.nuget\packages\bootstrap\5.3.3\contentFiles\any\any\wwwroot\css\site.css">
+        <Link>wwwroot\css\site.css</Link>
+      </Content>
     </ItemGroup>
     
 

@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\DataBase"
+    "\\DataBase",
+    "\\Views",
+    "\\Views\\crud"
   ],
   "SelectedNode": "\\DataBase\\Connection.cs",
   "PreviewInSolutionExplorer": false

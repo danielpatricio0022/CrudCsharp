@@ -148,3 +148,5 @@ C:\Users\se66162\IdeaProjects\CrudCsharp\CRUD\obj\Debug\net8.0\refint\CRUD.dll
 C:\Users\se66162\IdeaProjects\CrudCsharp\CRUD\obj\Debug\net8.0\CRUD.pdb
 C:\Users\se66162\IdeaProjects\CrudCsharp\CRUD\obj\Debug\net8.0\CRUD.genruntimeconfig.cache
 C:\Users\se66162\IdeaProjects\CrudCsharp\CRUD\obj\Debug\net8.0\ref\CRUD.dll
+C:\Users\CMT\RiderProjects\App\CRUD\bin\Debug\net8.0\CRUD.staticwebassets.runtime.json
+C:\Users\CMT\RiderProjects\App\CRUD\bin\Debug\net8.0\Cake.LibMan.dll

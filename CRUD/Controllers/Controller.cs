@@ -13,19 +13,19 @@ namespace CRUD.Controllers
             _personService = personService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index() //Raiz ./localhost
         {
             var persons = _personService.GetAllPersons();
             return View(persons);
         }
 
-        [HttpGet]
+        [HttpGet] //crud/person  Get(Add person)
         public IActionResult Person()
         {
             return View("post", new Person());
         }
 
-        [HttpPost]
+        [HttpPost] //crud/person  Post(Add person) 
         public IActionResult Person(Person person)
         {
             if (ModelState.IsValid)
@@ -47,7 +47,7 @@ namespace CRUD.Controllers
             return View("post", person);
         }
 
-        [HttpPost]
+        [HttpPost] //crud/updateperson Post(Teste Api funcionando backend/query postman) RETURN 500 view
         public IActionResult UpdatePerson(Person person)
         {
             if (ModelState.IsValid)
@@ -69,8 +69,8 @@ namespace CRUD.Controllers
 
 
 
-        [HttpGet]
-        public IActionResult GetPersonById(long id)
+        [HttpGet]  // crud/getpersonbyid?id=3 QUERY PARAMETER
+        public IActionResult GetPersonById(long id) 
         {
             try
             {
@@ -93,7 +93,7 @@ namespace CRUD.Controllers
         }
 
 
-        [HttpDelete]
+        [HttpDelete] // Post(Teste Api funcionando backend/ postman) RETURN 500 view
         public IActionResult DeletePerson(long id)
         {
             var success = _personService.DeletePerson(id);

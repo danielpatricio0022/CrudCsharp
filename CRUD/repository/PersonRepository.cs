@@ -6,10 +6,18 @@ namespace CRUD.Repository
 {
     public class PersonRepository
     {
-        string path = @"C:\Users\se66162\IdeaProjects\CrudCsharp\CRUD\DataBase\CRUD.db";   // caminho absoluto
+        string dbFileName = "CRUD.db";
+
+        public string GetDbPath()
+        {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string dbPath = Path.Combine(currentDirectory, "DataBase", dbFileName);
+            return dbPath;
+        }
 
         public SqliteConnection Connect()
         {
+            string path = GetDbPath(); 
             var connection = new SqliteConnection($"DataSource={path}");
             try
             {
