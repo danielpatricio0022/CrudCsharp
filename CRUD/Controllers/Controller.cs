@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CRUD.Controllers
 {
+    
+  
     public class Crud : Controller
     {
         private readonly PersonService _personService;
@@ -12,20 +14,20 @@ namespace CRUD.Controllers
         {
             _personService = personService;
         }
-
+        
         public IActionResult Index() //Raiz ./localhost
         {
             var persons = _personService.GetAllPersons();
             return View(persons);
         }
 
-        [HttpGet] //crud/person  Get(Add person)
+        [HttpGet("person")] //person  Get(Add person)
         public IActionResult Person()
         {
             return View("post", new Person());
         }
 
-        [HttpPost] //crud/person  Post(Add person) 
+        [HttpPost("person")] //person  Post(Add person) 
         public IActionResult Person(Person person)
         {
             if (ModelState.IsValid)
@@ -37,7 +39,7 @@ namespace CRUD.Controllers
                     return RedirectToAction("Index");
                 }
 
-                TempData["ErrorMessage"] = "Failed to create personn.";
+                TempData["ErrorMessage"] = "Failed to create person.";
             }
             else
             {
@@ -47,29 +49,43 @@ namespace CRUD.Controllers
             return View("post", person);
         }
 
-        [HttpPost] //crud/updateperson Post(Teste Api funcionando backend/query postman) RETURN 500 view
-        public IActionResult UpdatePerson(Person person)
+        [HttpGet("getperson/{id}")] 
+        public IActionResult GetPerson(long id)
         {
-            if (ModelState.IsValid)
-            {
-                var updatedPerson = _personService.UpdatePerson(person);
-
-                if (updatedPerson != null)
-                {
-                    TempData["SuccessMessage"] = "Person created successfully!";
-                }
-
-                {
-                    TempData["ErrorMessage"] = "Invalid input data.";
-                }
-            }
-            TempData["SuccessMessage"] = "Person created successfully!";
-            return RedirectToAction("Index");
+            return Ok(new { Id = id });
         }
 
+        [HttpPut("updateperson/{id}")] //crud/updateperson Put(return json response)
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public IActionResult UpdatePerson(long id, [FromBody] Person person) 
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["ErrorMessage"] = "Invalid input data.";
+                return BadRequest(new { message = "Invalid input data." }); 
+            }
 
+            var existingPerson = _personService.GetPersonById(id);
 
-        [HttpGet]  // crud/getpersonbyid?id=3 QUERY PARAMETER
+            if (existingPerson == null)
+            {
+                TempData["ErrorMessage"] = "Person not found.";
+                return NotFound(new { message = "Person not found." }); 
+            }
+
+            existingPerson.firstName = person.firstName;
+            existingPerson.lastName = person.lastName;
+            existingPerson.address = person.address;
+            existingPerson.gender = person.gender;
+
+            var updatedPerson = _personService.UpdatePerson(existingPerson);
+
+            TempData["SuccessMessage"] = "Person updated successfully!";
+            return Ok(updatedPerson); 
+        }
+
+        [HttpGet("getpersonbyid/{id}")]  // crud/getpersonbyid?id=3 QUERY PARAMETER
         public IActionResult GetPersonById(long id) 
         {
             try
@@ -92,7 +108,6 @@ namespace CRUD.Controllers
             }
         }
 
-
         [HttpDelete] // Post(Teste Api funcionando backend/ postman) RETURN 500 view
         public IActionResult DeletePerson(long id)
         {
@@ -109,8 +124,6 @@ namespace CRUD.Controllers
 
             return RedirectToAction("Index");
         }
-        
-        
 
         public string Welcome(string name)
         {
