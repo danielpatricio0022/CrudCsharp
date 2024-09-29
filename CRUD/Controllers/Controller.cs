@@ -20,6 +20,29 @@ namespace CRUD.Controllers
             var persons = _personService.GetAllPersons();
             return View(persons);
         }
+        
+        [HttpGet("getpersonbyid")]  //getpersonbyid?id=3 QueryParam
+        public IActionResult GetPersonById([FromQuery] long id) 
+        {
+            try
+            {
+                var entityById = _personService.GetPersonById(id);
+
+                if (entityById != null)
+                {
+                    TempData["SuccessMessage"] = "Person found!";
+                    return View("byid", entityById); 
+                }
+
+                TempData["ErrorMessage"] = "Person not found!";
+                return View("byid"); 
+            }
+            catch (Exception ex) 
+            {
+                TempData["ErrorMessage"] = "An error occurred while retrieving the person: " + ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
 
         [HttpGet("person")] //person  Get(Add person)
         public IActionResult Person()
@@ -49,13 +72,9 @@ namespace CRUD.Controllers
             return View("post", person);
         }
 
-        [HttpGet("getperson/{id}")] 
-        public IActionResult GetPerson(long id)
-        {
-            return Ok(new { Id = id });
-        }
+       
 
-        [HttpPut("updateperson/{id}")] //crud/updateperson Put(return json response)
+        [HttpPut("updateperson/{id}")] //updateperson Put(return json response)
         [Produces("application/json")]
         [Consumes("application/json")]
         public IActionResult UpdatePerson(long id, [FromBody] Person person) 
@@ -85,30 +104,9 @@ namespace CRUD.Controllers
             return Ok(updatedPerson); 
         }
 
-        [HttpGet("getpersonbyid/{id}")]  // crud/getpersonbyid?id=3 QUERY PARAMETER
-        public IActionResult GetPersonById(long id) 
-        {
-            try
-            {
-                var entityById = _personService.GetPersonById(id);
+        
 
-                if (entityById != null)
-                {
-                    TempData["SuccessMessage"] = "Person found!";
-                    return View("byid", entityById);
-                }
-
-                TempData["ErrorMessage"] = "Person not found!";
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex) 
-            {
-                TempData["ErrorMessage"] = "An error occurred while retrieving the person: " + ex.Message;
-                return RedirectToAction("Index");
-            }
-        }
-
-        [HttpDelete] // Post(Teste Api funcionando backend/ postman) RETURN 500 view
+        [HttpDelete("deletePerson")] // Post(Teste Api funcionando backend/ postman) RETURN 500 view
         public IActionResult DeletePerson(long id)
         {
             var success = _personService.DeletePerson(id);
